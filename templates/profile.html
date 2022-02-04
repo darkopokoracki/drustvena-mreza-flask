@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block link %}
+    <link rel="stylesheet" 
+          href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+
+{% block title %} Profile {% endblock %}
+
+
+{% block content %}
+    <h1>Profile</h1>
+    <section class="profile-section">
+        <div class="profile-container">
+            <div class="left">
+                <div class="profile-img-container">
+                    <img src="/static/images/profile/{{ user.get_profile_image() }}" 
+                         alt="Default profile icon">
+                </div>
+                <div class="personal-info">
+                    <h1>{{ user.get_firstname() }} {{ user.get_lastname() }}</h1>
+                    <h2>@{{ user.get_username() }}</h2>
+                </div>
+            </div>
+            
+            <div class="right">
+                <button>Edit Profile</button>
+                <button>Add Post</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="posts-section">
+
+    </section>
+{% endblock %}

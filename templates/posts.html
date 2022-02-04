@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %} Posts {% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/posts.css') }}">
+{% endblock %}
+
+{% block content %}
+    {% include 'likesModal.html' %}
+
+    <section class="main-section">
+        <section class="left-contacts-section">
+            <h2>Contacts</h2>
+            <div class="contacts">
+                {% for user in users %}
+                <a href="/profile/{{ user.get_username() }}">
+                    <div class="contact">
+                        <div class="user-profile">
+                            <img src="/static/images/profile/{{ user.get_profile_image() }}" alt="">
+                            <p>
+                                {{ user.get_firstname() }} {{ user.get_lastname() }}
+                            </p>
+                            {% if session['username'] == user.get_username() %}
+                            <i class="fas fa-circle active"></i>
+                            {% endif %}
+                        </div>
+                    </div> 
+                </a>
+                {% endfor %}
+            </div>
+        </section>    
+
+        <div class="posts">
+            {% for i in range(m) %}
+            <div class="post">
+                <div class="user-profile">
+                    <img src="/static/images/profile/{{ join_res[i][3] }}" alt="">
+                    <p>
+                        {{ join_res[i][1] }} {{ join_res[i][2] }}
+                    </p>
+                    {% if session['username'] == join_res[i][4] %}
+                    <i class="fas fa-circle active"></i>
+                    {% endif %}
+                </div>
+
+                <h2 class="post-title">{{ join_res[i][0] }}</h2>
+                <p class="post-content">{{ posts[i].get_content() }}</p>
+                <div class="img-container">
+                    <img src="/static/images/posts/{{ posts[i].get_image() }}" 
+                         alt="{{ posts[i].get_title() }}">
+                </div>
+
+                <div class="comment-like">
+                    <div class="numbers">
+                        <div class="likes">
+                            {% if session['id'] is in all_posts[i] %}
+                            <i class="fas fa-thumbs-up"></i>
+                            {% else %}
+                            <i class="far fa-thumbs-up"></i>
+                            {% endif %}
+                            <p class="like-number">{{ likes_join[i][0] }}</p>
+                        </div>
+
+                        <div class="comments">
+                            <p class="comments-number">40</p>
+                            <p>Comments</p> 
+                        </div>
+                    </div>
+
+                    <div class="buttons">
+                        <form id="like-form" action="/add_like/{{ posts[i].get_userID() }}/{{ posts[i].get_id() }}" method="POST">
+                            <button class="like-btn liked">
+                                {% if session['id'] is in all_posts[i] %}
+                                <i class="fas fa-thumbs-up"></i>
+                                {% else %}
+                                <i class="far fa-thumbs-up"></i>
+                                {% endif %}
+                                Like
+                            </button>
+                        </form>
+
+                        <form action="/add_comment" method="POST">
+                            <button class="comment-btn">
+                                <i class="fas fa-comment"></i>
+                                comment
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <form action="/who_liked" 
+          id="who_liked_form" 
+          method="GET" 
+          style="display: none;">
+          <input type="submit">
+    </form>
+
+    <script src="{{ url_for('static', filename='js/posts.js') }}"></script>
+
+{% endblock %}
