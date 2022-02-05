@@ -23,11 +23,12 @@
                     <h2>@{{ user.get_username() }}</h2>
                 </div>
             </div>
-            
+            {% if 'id' in session and session['id'] == user.get_id() %}
             <div class="right">
-                <button>Edit Profile</button>
-                <button>Add Post</button>
+                <a class="btn" href="/edit/{{ user.get_username() }}">Edit Profile</a>
+                <a class="btn" href="/create_post">Add Post</a>
             </div>
+            {% endif %}
         </div>
     </section>
 

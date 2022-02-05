@@ -12,7 +12,7 @@
     align-items: center;
 }
 
-.right button {
+.right .btn {
     border: none;
     border-radius: .5rem;
     background: white;
@@ -21,6 +21,16 @@
     width: 100%;
     margin-right: 2rem;
     margin-bottom: .3rem;
+    display: block;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.right .btn:hover {
+    background-color: black;
+    color: white;
+    transition: 300ms;
 }
 
 .profile-img-container img {

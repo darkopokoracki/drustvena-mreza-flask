@@ -1,0 +1,61 @@
+.edit-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-picture {
+    width: 38%;
+    border: 1px solid black;
+}
+
+.edit-info {
+    width: 58%;
+} 
+
+.edit-info .group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+    background: rgb(240, 240, 240);
+}
+
+.edit-info .group button {
+    border: none;
+    border-radius: 7px;
+    background: rgb(220, 220, 220);
+    padding: .75rem;
+    font-weight: bold;
+}
+
+.edit-info .group button:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    transition: 300ms;
+}
+
+#submit-btn {
+    width: 30%;
+    border: none;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: block;
+    margin-top: 2rem;
+    padding: 1rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    background: rgb(200, 200, 200);
+}
+
+#submit-btn:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+.d_none {
+    display: none;
+}

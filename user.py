@@ -96,3 +96,10 @@ class User:
         session['lastname'] = self.__lastname
         session['id'] = self.__id
 
+    def update(self):
+        cursor = mydb.cursor(prepared = True)
+        sql = 'UPDATE user SET firstName = ?, last_name = ?, username = ?, profile_image = ? WHERE uderID = ?'
+        values = (self.__firstname, self.__lastname, self.__username, self.__profile_image, self.__id)
+        cursor.execute(sql, values)
+
+        mydb.commit()

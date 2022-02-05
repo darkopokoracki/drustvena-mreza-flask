@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}">
+{% endblock %}
+
+{% block title %} Edit {% endblock %}
+
+
+{% block content %}    
+    <section class="edit-section">
+        <form action="/edit/{{ user.get_username() }}" method="POST" enctype="multipart/form-data">
+            <div class="edit-container">
+                <div class="edit-picture">
+                    <img src="/static/images/profile/{{ user.get_profile_image() }}" 
+                         alt="Profile_image">
+                    <label for="profile-image">Change Profile Image</label>
+                    <input type="file" name="profile_picture" id="profile-picture" onchange="setProfilePicture();">
+                    <span id="extension-error">{{ extension_error }}</span>
+                </div>
+        
+                <div class="edit-info">
+                    <span>{{ firstname_error }}</span>
+                    <div class="group">
+                        <h2>Firstname</h2>
+                        <p id="firstname-info">{{ user.get_firstname() }}</p>
+                        <button id="for-firstname">Edit</button>
+                    </div>
+                    <div class="d_none">
+                        <input type="text" name="firstname" id="firstname" value="{{ user.get_firstname() }}">
+                        <button id="firstname-ok">OK</button>
+                    </div>
+
+                    <span>{{ lastname_error }}</span>
+                    <div class="group">
+                        <h2>Lastname</h2>
+                        <p id="lastname-info">{{ user.get_lastname() }}</p>
+                        <button id="for-lastname">Edit</button>
+                    </div>
+                    <div class="d_none">
+                        <input type="text" name="lastname" id="lastname" value="{{ user.get_lastname() }}">
+                        <button id="lastname-ok">OK</button>
+                    </div>
+
+                    <span>{{ username_error }}</span>
+                    <span>{{ username_exists_error }}</span>
+                    <div class="group">
+                        <h2>Username</h2>
+                        <p id="username-info">@{{ user.get_username() }}</p>
+                        <button id="for-username">Edit</button>
+                    </div>
+                    <div class="d_none">
+                        <input type="text" name="username" id="username" value="{{ user.get_username() }}">
+                        <button id="username-ok">OK</button>
+                    </div>
+                </div>
+            </div>
+            <input id="submit-btn" type="submit" value="save">
+        </form>
+    </section>
+    
+
+    <script src="{{ url_for('static', filename='js/edit.js') }}"></script>
+{% endblock %}
