@@ -29,9 +29,11 @@
         </div>
 
         <div>
+            {% if 'username' in session %}
             <a href="/profile/{{ session['username'] }}">
                 <i class="fas fa-user-alt"></i>
             </a>
+            {% endif %}
             <i class="fas fa-bell"></i>
             <i class="fas fa-cog"></i>
         </div>

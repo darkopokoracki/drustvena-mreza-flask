@@ -103,3 +103,4 @@ class User:
         cursor.execute(sql, values)
 
         mydb.commit()
+        session['username'] = self.__username

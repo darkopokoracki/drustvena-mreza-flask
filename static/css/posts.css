@@ -89,6 +89,19 @@
     margin-bottom: 1rem;
 }
 
+.post .user-profile a {
+    text-decoration: none;
+    color: black;
+}
+
+.post .user-profile a p:hover {
+    text-decoration: underline;
+}
+
+.post .user-profile a img:hover {
+    opacity: 0.9;
+}
+
 .post .user-profile img {
     width: 45px;
     height: 45px;
@@ -121,10 +134,17 @@
     color: green;
 }
 
-.active {
+.contact .user-profile .active {
     position: absolute;
     left: 30px;
     bottom: -3px;
+    font-size: .85rem;
+}
+
+.post .user-profile .active {
+    position: absolute;
+    left: 30px;
+    bottom: 3px;
     font-size: .85rem;
 }
 

@@ -36,6 +36,11 @@ def home():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if len(session) > 0:
+        return redirect(
+            url_for('posts')
+        )
+
     if request.method == 'GET':
         return render_template(
             'register.html'
@@ -102,6 +107,11 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if len(session) > 0:
+        return redirect(
+            url_for('posts')
+        )
+
     if request.method == 'GET':
         return render_template(
             'login.html'
@@ -142,6 +152,11 @@ def login():
 
 @app.route('/create_post', methods=['GET', 'POST'])
 def create_post():
+    if len(session) == 0:
+        return redirect(
+            url_for('login')
+        )
+
     if len(session) == 0:
         return redirect(
             url_for('login')
@@ -202,6 +217,11 @@ def create_post():
 
 @app.route('/posts')
 def posts():
+    if len(session) == 0:
+        return redirect(
+            url_for('login')
+        )
+
     # Uzimamo sve postove iz baze
     cursor = mydb.cursor(prepared = True)
     sql = 'SELECT * FROM post'
@@ -268,7 +288,6 @@ def posts():
     for i in range(n):
         join_res[i] = dekodiraj(join_res[i])
 
-
     # join_res izgleda ovako:
     # [['title1', 'firstname1', 'lastname1', 'profile_image1', 'username1'], ['title2','firstname2', 'lastname2', 'profile_image2', 'username2']]
     m = len(posts)
@@ -325,7 +344,11 @@ def post(id):
 
 @app.route('/profile/<username>')
 def profile(username):
-    
+    if len(session) == 0:
+        return redirect(
+            url_for('login')
+        )
+
     cursor = mydb.cursor(prepared = True)
     sql = 'SELECT * FROM user WHERE username = ?'
     values = (username, )
