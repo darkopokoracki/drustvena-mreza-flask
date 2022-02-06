@@ -465,19 +465,28 @@ def edit(username):
         lastname = request.form['lastname']
         new_username = request.form['username']
         profile_picture = request.files['profile_picture']
-        return str(profile_picture.filename)
+
         allowed_extensions = ['jpg', 'png', 'jpeg']
-        extension = profile_picture.filename.split('.')[-1]
-        
-        if profile_picture and extension in allowed_extensions:
-            filename = secure_filename(profile_picture.filename)
-            profile_picture.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        if not profile_picture:
+            profile_picture = res[6]
+            extension = profile_picture.split('.')[-1]
+
         else:
-            return render_template (
-                'edit.html',
-                user = user,
-                extension_error = 'Ekstenzija nije dozvoljena!'
-            )
+            extension = profile_picture.filename.split('.')[-1]
+        
+            if profile_picture and extension in allowed_extensions:
+                filename = secure_filename(profile_picture.filename)
+                profile_picture.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            else:
+                return render_template (
+                    'edit.html',
+                    user = user,
+                    extension_error = 'Ekstenzija nije dozvoljena!'
+                )
+            
+            profile_picture = profile_picture.filename
+
         # return str(user)
         #Validacija...
         if len(firstname) < 2:
@@ -519,7 +528,7 @@ def edit(username):
         user.set_firstname(firstname)
         user.set_lastname(lastname)
         user.set_username(new_username)
-        user.set_profile_image(profile_picture.filename)
+        user.set_profile_image(profile_picture)
 
         user.update()
         mydb.commit()
@@ -528,17 +537,5 @@ def edit(username):
             url_for('profile', username = new_username)
         )
 
-        # cursor = mydb.cursor(prepared = True)
-        # sql = 'UPDATE user SET firstName = ?, last_name = ?, username = ?, profile_image = ? WHERE uderID = ?'
-        # values = (firstname, lastname, new_username, profile_picture.filename, res[0])
-        # cursor.execute(sql, values)
-
-        # mydb.commit()
-
-        return 'Successfully!'
-    
-
-
-    
 
 app.run(debug = True)

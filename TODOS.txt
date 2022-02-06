@@ -1,0 +1,9 @@
+1. Staviti link za profil na postovima...
+2. Popraviti bag, kada promenim username onda kao da korisnik vise nije ulogovan
+	- Moze da se popravi tako sto necu vise cuvati username u sesiji (nije bas preporucljivo)
+
+	- Mozda postoji bag zbog toga sto sam stavio sesiju i izvan main.py 
+
+	- Prati gde sve koristis sesiju i prati gde se redirektujes... i da li ucitavas najnovije podatke...
+
+	- Resenje: Kada promenis username, odmah setuj novi username na sesiju, da bi pregazio stari username
