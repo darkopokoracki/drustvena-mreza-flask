@@ -1,5 +1,5 @@
 - Taskovi:
-1. Srediti create_post stranicu.
+(1). Srediti create_post stranicu.
 2. Na pofil stranici ucitati sve postove koje je taj korisnik objavio i omoguciti mu da obrise
 3. Srediti Home Stranicu
 (4). Ako korisnik nije ulogovan ili ako nije ulogovan, 

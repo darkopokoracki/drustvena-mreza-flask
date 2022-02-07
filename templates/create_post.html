@@ -1,35 +1,47 @@
 {% extends 'base.html' %}
 
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create_post.css') }}">
+{% endblock %}
+
 {% block title %} Create Post {% endblock %}
 
 
 {% block content %}
     <h1>Create Post</h1>
-    <hr>
     <form action="/create_post" method="POST" enctype="multipart/form-data">
-        <div class="group">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title">
-            <span>{{ title_error }}</span>
-        </div>
+        <div class="create-post-container">
+            <div class="create-post-text">
+                <div class="group">
+                    <label for="title">Title: </label>
+                    <input type="text" name="title" id="title" placeholder="Title for post...">
+                    <span>{{ title_error }}</span>
+                </div>
+        
+                <div class="group">
+                    <label for="content">Content: </label>
+                    <textarea placeholder="What's on your mind, {{ session['firstname'] }}?" name="content" id="textarea-content" rows='15'></textarea>
+                    <span>{{ content_error }}</span>
+                </div>
+            </div>
 
-        <div class="group">
-            <label for="content">Content</label>
-            <textarea name="content" id="content" cols="30" rows="10">
-
-            </textarea>
-            <span>{{ content_error }}</span>
-        </div>
-
-        <div class="froup">
-            <label for="image">Image</label>
-            <input type="file" name="image" id="image">
-            <span>{{ image_error }}</span>
-            <span>{{ extension_error }}</span>
+            <div class="create-post-image">
+                <div class="group">
+                    <img src="/static/images/posts/upload.png" 
+                        style="max-width: 70%;" id="post-image" alt="Upload image">
+                    <label for="image" id="image-label">Upload Image</label>
+                    <input type="file" name="image" id="image" onchange="uploadImage();">
+                    <span>{{ image_error }}</span>
+                    <span id="extension-error">{{ extension_error }}</span>
+                </div>
+            </div>
         </div>
 
         <div>
-            <input type="submit" value="Postavi">
+            <input type="submit" value="Postavi" id="submit-btn">
         </div>
     </form>
+
+
+    <script src="{{ url_for('static', filename='js/create_post.js') }}"></script>
 {% endblock %}

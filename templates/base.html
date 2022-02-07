@@ -23,9 +23,14 @@
             <a href="/home">
                 <i class="fas fa-home"></i>
             </a>
+            {% if 'username' in session %}
             <a href="/posts">
                 <i class="fas fa-clone"></i>
             </a>
+            <a href="/create_post">
+                <i class="fas fa-folder-plus"></i>
+            </a>
+            {% endif %}
         </div>
 
         <div>
@@ -33,9 +38,13 @@
             <a href="/profile/{{ session['username'] }}">
                 <i class="fas fa-user-alt"></i>
             </a>
-            {% endif %}
+            
             <i class="fas fa-bell"></i>
             <i class="fas fa-cog"></i>
+            {% else %}
+            <a href="/register" class="register-link">Register</a>
+            <a href="/login" class="login-link">Login</a>
+            {% endif %}
         </div>
     </header>
 
