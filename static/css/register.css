@@ -1,0 +1,90 @@
+.form-container-center {
+    color: #4A4A4A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    overflow: hidden;
+}
+
+.form-container {
+    width: 850px;
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid black; */
+}
+
+.image-container {
+    width: 50%;
+    /* border: 1px solid black; */
+    background-image: url('/static/images/register-connect.jpg');
+    background-size: cover;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+
+.register-container {
+    width: 50%;
+    background-color: rgb(240, 240, 240);
+    padding: 1.5rem;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    /* border: 1px solid black; */
+}
+
+.register-container label {
+    display: block;
+    font-weight: 200;
+    margin-bottom: .2rem;
+}
+
+.register-container input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid rgb(150, 150, 150);
+    background: rgb(240, 240, 240);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: rgb(90, 90, 90);
+}
+
+.register-container input:focus {
+    outline: 0;
+    border-bottom: 2px solid rgb(90, 90, 90);
+}
+
+.btn {
+    border: none;
+    border-radius: 20px;
+    background: black;
+    color: white;
+    padding: .75rem 1.5rem;
+    border: 1px solid rgb(240, 240, 240);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.submit-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn:hover {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    transition: 200ms;
+    border: 1px solid black;
+}
+
+.already-member {
+    color: rgb(90, 90, 90);
+    font-size: .9rem;
+}
+
+.already-member:hover {
+    color: black;
+    transition: 300ms;
+}
