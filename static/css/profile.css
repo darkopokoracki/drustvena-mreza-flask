@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+.profile-section {
+    margin-bottom: 2rem;
+}
+
 .profile-container {
     padding: 2rem;
     background-color: rgb(240, 240, 240);
@@ -45,3 +49,50 @@ h1 {
     font-size: 2.3rem;
     margin-bottom: .5rem;
 }
+
+/* Posts section */
+.posts-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: rgb(240, 240, 240);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.post {
+    width: 32%;
+    padding: 1rem;
+    background: rgb(200, 200, 200);
+    border-radius: 18px;
+    margin-bottom: 1.5rem;
+}
+
+.read-more-btn {
+    border: none;
+    border-radius: 3px;
+    background: #008CBA;
+    color: white;
+    padding: .5rem;
+    font-weight: bold;
+    display: block;
+    margin-right: .5rem;
+    margin-left: auto;
+    margin-bottom: 1rem;
+}
+
+.read-more-btn:hover {
+    opacity: 0.9;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+
+.post-title {
+    text-align: center;
+}
+
+.post-content p {
+    margin: 1rem 0;
+}
+

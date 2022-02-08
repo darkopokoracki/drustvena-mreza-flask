@@ -6,3 +6,8 @@
 ne sme pristupiti odredjenim rutama. ---
 5*. Uraditi komentare (Sve)
 6. 
+
+* Treba mi:
+ - title (post)
+ - content (post)
+ - image (post)
