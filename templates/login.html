@@ -1,26 +1,32 @@
 {% extends 'base.html' %}
 
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
 {% block title %} Login {% endblock %}
 
 
 {% block content %}
-    <h1>Login</h1>
-    <hr>
-    <form action="/login" method="POST">
-        <div class="group">
-            <label for="email_username">Email or Username</label>
-            <input type="text" name="email_username" id="email_username">
-            <span>{{ email_username_error }}</span>
-        </div>
+    <div class="bg"></div>
+    <div class="form-container">
+        <form action="/login" method="POST">
+            <div class="group">
+                <input type="text" name="email_username" id="email_username">
+                <p class="error">{{ email_username_error }}</p>
+            </div>
+            
+    
+            <div class="group">
+                <input type="password" name="password" id="password">
+                <p class="error">{{ password_error }}</p>
+            </div>
+            
+    
+            <div class="group">
+                <button type="submit" class="btn">Log in</button>
+            </div>
+        </form>
+    </div>
 
-        <div class="group">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password">
-            <span>{{ password_error }}</span>
-        </div>
-
-        <div>
-            <input type="submit" value="Login">
-        </div>
-    </form>
 {% endblock %}
