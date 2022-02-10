@@ -59,5 +59,22 @@ header i:hover {
     color: white;
 }
 
+.sign-link {
+    border: none;
+    border-radius: 20px;
+    background: black;
+    color: white;
+    padding: .5rem 1rem;
+    border: 1px solid rgb(240, 240, 240);
+    font-weight: bold;
+}
+
+.sign-link:hover {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    transition: 200ms;
+    border: 1px solid black;
+}
 
 

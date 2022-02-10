@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, json, jsonify
+from importlib_metadata import re
 import mysql.connector
 from passlib.hash import sha256_crypt
 from werkzeug.utils import secure_filename
@@ -143,6 +144,7 @@ def login():
         )
 
     user = User(res[0], res[1], res[2], res[3], res[4], res[5], res[6])
+
     user.login() #Loginujemo korisnika pomocu metode u klasi User
 
     return redirect(
@@ -245,7 +247,6 @@ def posts():
 
         post = Post(post_id, title, content, image, userID)
         posts.append(post)
-
 
     # Uzimamo sve usere iz baze
     cursor = mydb.cursor(prepared = True)
@@ -421,8 +422,10 @@ def logout():
             url_for('register')
         )
 
-@app.route('/add_like/<user_id>/<post_id>', methods=['POST'])
-def add_like(user_id, post_id):
+@app.route('/add_like', methods=['POST'])
+def add_like():
+    dataA = request.form['whomLiked']
+    dataB = request.form['postID']
 
     #user_id = whomID
     #session = whoID 
@@ -430,7 +433,7 @@ def add_like(user_id, post_id):
     #Prvo treba proveiti da li je korisnik vec lajkovao taj post...
     cursor = mydb.cursor(prepared = True)
     sql = 'SELECT * FROM likes WHERE post_postID = ? AND who_liked = ?'
-    values = (post_id, session['id'])
+    values = (dataB, session['id'])
     cursor.execute(sql, values)
 
     res = cursor.fetchall()
@@ -438,22 +441,18 @@ def add_like(user_id, post_id):
     if len(res) != 0:
         cursor = mydb.cursor(prepared = True)
         sql = 'DELETE FROM likes WHERE post_postID = ? AND who_liked = ?'
-        values = (post_id, session['id'])
+        values = (dataB, session['id'])
         cursor.execute(sql, values)
         mydb.commit()
 
-        return redirect(
-            url_for('posts')
-        )
+        return 'OK'
 
-    one_like = Likes(None, user_id, post_id, session['id'])
+    one_like = Likes(None, dataA, dataB, session['id'])
     one_like.add_like()
 
     mydb.commit()
 
-    return redirect(
-        url_for('posts')
-    )
+    return 'OK'
 
 
 @app.route('/add_comment/<username>', methods=['POST'])
@@ -585,5 +584,15 @@ def edit(username):
             url_for('profile', username = new_username)
         )
 
+@app.route('/example')
+def example():
+    myData = {
+        'firstname': 'Darko',
+        'lastname': 'Pokoracki',
+        'age': 20
+    }
+
+    return jsonify(myData)
 
 app.run(debug = True)
+

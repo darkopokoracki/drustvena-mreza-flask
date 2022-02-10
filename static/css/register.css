@@ -65,18 +65,18 @@
     font-weight: bold;
 }
 
-.submit-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .btn:hover {
     color: black;
     background-color: white;
     cursor: pointer;
     transition: 200ms;
     border: 1px solid black;
+}
+
+.submit-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .already-member {

@@ -1,18 +1,37 @@
-function main() {
-    likeNumber = document.getElementsByClassName('like-number');
+$(document).ready(function() {
 
-    for (let i = 0; i < likeNumber.length; i++) {
-        likeNumber[i].addEventListener('click', openLikesModal)
+
+    let loggedUser = document.querySelector('.logged-user').id;
+    let addLikeButtos = $('.like-btn');
+    let icons = $('.fas');
+    let likes = $('.like-number'); // Svi lajkovi od svakog posta.
+
+
+
+    for (let i = 0; i < addLikeButtos.length; i++) {
+        addLikeButtos[i].addEventListener('click', (e) => {
+            e.preventDefault();
+
+            let whomLiked = e.target.parentElement.children[1].id // Ko je lajkovao
+            let postID = e.target.parentElement.children[2].id  // Koji post je lajkovan
+            
+            console.log(whomLiked);
+            console.log(postID);
+            console.log(likes[postID]);
+
+
+            $.ajax({
+                data: {
+                    whomLiked: whomLiked,
+                    postID: postID
+                },
+                
+                type: 'POST',
+                url: '/add_like'
+            })
+            .done(function(data) {
+                console.log(data)
+            });
+        });
     }
-}
-
-function openLikesModal() {
-    console.log('open')
-    whoLikedForm = document.querySelector('.who-liked-form input');
-    console.log(whoLikedForm)
-    whoLikedForm.submit()
-    console.log('Submitovali smo formu...');
-}
-
-
-window.addEventListener('load', main);
+});
