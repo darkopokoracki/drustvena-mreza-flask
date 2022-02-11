@@ -1,13 +1,8 @@
-- Taskovi:
-(1). Srediti create_post stranicu.
-2. Na pofil stranici ucitati sve postove koje je taj korisnik objavio i omoguciti mu da obrise
-3. Srediti Home Stranicu
-(4). Ako korisnik nije ulogovan ili ako nije ulogovan, 
-ne sme pristupiti odredjenim rutama. ---
-5*. Uraditi komentare (Sve)
-6. 
-
-* Treba mi:
- - title (post)
- - content (post)
- - image (post)
+- Sta mi treba zz jedan post:
+1. user.profile image
+2. user.firstname
+3. user.lastname
+4. post.title
+5. post.content
+6. post.image
+7. number of likes

@@ -220,3 +220,7 @@
     transition: 300ms;
     cursor: pointer;
 }
+
+.d_none {
+    display: none;
+}

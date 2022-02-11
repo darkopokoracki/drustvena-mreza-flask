@@ -1,3 +1,4 @@
+from math import nan
 from flask import Flask, render_template, request, redirect, url_for, session, json, jsonify
 from importlib_metadata import re
 import mysql.connector
@@ -325,7 +326,6 @@ def posts():
                 one_post.append(who_liked[j][1])
         all_posts.append(one_post)
 
-
     return render_template(
         'posts.html',
         posts = posts,
@@ -337,11 +337,83 @@ def posts():
     )
 
 
+@app.route('/get_posts')
+def get_posts():
+    cursor = mydb.cursor(prepared = True)
+    sql = 'SELECT post.postID, post.title, post.content, post.image, user.uderID, user.firstName, user.last_name, user.email, user.username, profile_image FROM post INNER JOIN user ON post.user_uderID = user.uderID ORDER BY postID;'
+    cursor.execute(sql)
+    join_res = cursor.fetchall()
+
+    n = len(join_res)
+    join_res = list(join_res)
+
+    for i in range(n):
+        join_res[i] = dekodiraj(join_res[i])
+
+    # join_res izgleda ovako:
+    # [['postID1', 'title1', 'content1', 'image1', 'userID1', 'firstname1', 'lastname1', 'email1', 'username1', 'profile_image1'], 
+    # [['postID2', 'title2', 'content2', 'image2', 'userI2', 'firstname2', 'lastname2', 'email2', 'username2', 'profile_image2']]
+    ##############################################
+
+    #Moramo da znamo da li je ulogovano korisnik lajkovao odredjeni post
+    cursor = mydb.cursor(prepared = True)
+    sql = 'SELECT post_postID, who_liked from likes;'
+    cursor.execute(sql)
+    who_liked = cursor.fetchall()
+
+    t = len(who_liked)
+    for i in range(t):
+        who_liked[i] = dekodiraj(who_liked[i])
+
+    ###################################################
+    cursor = mydb.cursor(prepared = True)
+    sql = 'SELECT COUNT(likes.likeID), post.postID FROM likes RIGHT JOIN post ON likes.post_postID = post.postID GROUP BY post.postID;'
+    cursor.execute(sql)
+    likes_join = cursor.fetchall()
+
+    a = len(likes_join)
+    for i in range(a):
+        likes_join[i] = dekodiraj(likes_join[i])
+
+    all_posts = [] #Ovo je ko je sve lajkovao jedan post...
+
+    for i in range(n):
+        one_post = []
+        for j in range(len(who_liked)):
+            if join_res[i][0] == who_liked[j][0]:
+                one_post.append(who_liked[j][1])
+        all_posts.append(one_post)
+
+    # Treba da formirao jsonify
+    posts = []
+    for i in range(n):
+        post = {
+            'postID': join_res[i][0],
+            'title': join_res[i][1],
+            'content': join_res[i][2],
+            'image': join_res[i][3],
+            'userID': join_res[i][4],
+            'firstname': join_res[i][5],
+            'lastname': join_res[i][6],
+            'email': join_res[i][7],
+            'username': join_res[i][8],
+            'profile_image': join_res[i][9],
+            'likes': likes_join[i][0],
+            'currentUser': session['id'],
+            'whoLiked': all_posts[i],
+            'isLiked': None
+        }
+
+        posts.append(post)
+
+    return jsonify(posts)
+
+
+
 @app.route('/posts/<id>')
 def post(id):
     cursor = mydb.cursor(prepared = True)
     
-
 
 @app.route('/profile/<username>')
 def profile(username):
