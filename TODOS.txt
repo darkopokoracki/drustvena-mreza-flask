@@ -1,8 +1,4 @@
-- Sta mi treba zz jedan post:
-1. user.profile image
-2. user.firstname
-3. user.lastname
-4. post.title
-5. post.content
-6. post.image
-7. number of likes
+- Sta mi treba za komentar:
+	1. user.profile_image
+	2. user.firstname
+	3. user.lastname

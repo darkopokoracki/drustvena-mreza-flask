@@ -188,6 +188,10 @@
     padding: .5rem .5rem 1rem .5rem;
 }
 
+.buttons .comment-btn {
+    width: 48%;
+}
+
 .buttons form {
     width: 48%;
 }
@@ -219,6 +223,101 @@
     text-decoration: underline;
     transition: 300ms;
     cursor: pointer;
+}
+
+.comment-section {
+    padding: 1rem .5rem;
+    background-color: rgb(200, 200, 200);
+}
+
+.write-comment-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.write-comment-container a {
+    margin-right: .5rem;
+}
+
+.write-comment-container img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgb(240, 240, 240);
+}
+
+.write-comment-container .active {
+    position: absolute;
+    left: 30px;
+    bottom: 3px;
+    font-size: .85rem;
+    color: green;
+}
+
+#comment-input {
+    width: 68%;
+    border: none;
+    border-radius: 10px;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    margin-right: 1rem;
+}
+
+.add-comment-btn {
+    width: 20%;
+    border: none;
+    font-weight: bold;
+    background: black;
+    color: white;
+    font-size: 1rem;
+    border-bottom-left-radius: 20px;
+}
+
+.add-comment-btn:hover {
+    color: black;
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+    transition: 300ms;
+}
+
+#comment-input:focus {
+    outline: none;
+}
+
+.read-comment-container {
+    margin-top: 2rem;
+}
+
+.one-comment {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.one-comment a {
+    margin-right: 1rem;
+}
+
+.one-comment img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgb(240, 240, 240);
+}
+
+.one-comment .content-container {
+    width: 80%;
+    background: rgb(240, 240, 240);
+    padding: .5rem 1rem;
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+    border-radius: 10px;
+}
+
+.content-container h3 {
+    font-size: 1rem;
+    margin-bottom: .75rem;
 }
 
 .d_none {

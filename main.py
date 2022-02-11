@@ -1,6 +1,4 @@
-from math import nan
 from flask import Flask, render_template, request, redirect, url_for, session, json, jsonify
-from importlib_metadata import re
 import mysql.connector
 from passlib.hash import sha256_crypt
 from werkzeug.utils import secure_filename
@@ -306,6 +304,62 @@ def posts():
         likes_join[i] = dekodiraj(likes_join[i])
 
 
+    #Moramo da znamo broj komentara za svako post koliko ima.
+    cursor = mydb.cursor(prepared = True)
+    sql = 'SELECT COUNT(comment.commentID), post.postID FROM comment RIGHT JOIN post ON comment.post_postID = post.postID GROUP BY post.postID;'
+    cursor.execute(sql)
+    comments_join = cursor.fetchall()
+
+    b = len(comments_join)
+    for i in range(b):
+        comments_join[i] = dekodiraj(comments_join[i])
+
+    ###################
+    #Prostor za rad
+    cursor = mydb.cursor(prepared = True)
+    sql = 'SELECT comment.commentID, comment.content, comment.post_postID, user.firstName, user.last_name, user.username, user.profile_image FROM comment INNER JOIN user ON comment.user_uderID = user.uderID;'
+    cursor.execute(sql)
+    comment_user_join = cursor.fetchall()
+
+    g = len(comment_user_join)
+    for i in range(g):
+        comment_user_join[i] = dekodiraj(comment_user_join[i])
+
+    #comment_user_join izgleda ovako:
+    #[['commentID','commentContent','postID','firstname','lastname','username','profilePicture']
+    ###############
+
+    #Moramo da znamo ko je sve komentarisao post, tj svaki post
+    cursor = mydb.cursor(prepared = True)
+    sql = 'SELECT * from comment;'
+    cursor.execute(sql)
+    comments = cursor.fetchall()
+
+    v = len(comments)
+    for i in range(v):
+        comments[i] = dekodiraj(comments[i])
+
+    all_comments_posts = [] #Ovo je ko je sve komentarisao jedan post...
+
+    for i in range(len(posts_res)):
+        one_post = []
+        for j in range(len(comment_user_join)):
+            one_comment = []
+            if posts_res[i][0] == comment_user_join[j][2]:
+                one_comment.append(comment_user_join[j][1])  #Comment content
+                one_comment.append(comment_user_join[j][3])  #Firstname
+                one_comment.append(comment_user_join[j][4])  #Lastname
+                one_comment.append(comment_user_join[j][5])  #username
+                one_comment.append(comment_user_join[j][6])  #Profile picture
+                one_post.append(one_comment)
+        all_comments_posts.append(one_post)
+    
+
+
+
+
+
+
     #Moramo da znamo da li je ulogovano korisnik lajkovao odredjeni post
     cursor = mydb.cursor(prepared = True)
     sql = 'SELECT post_postID, who_liked from likes;'
@@ -326,6 +380,8 @@ def posts():
                 one_post.append(who_liked[j][1])
         all_posts.append(one_post)
 
+    # return str(all_comments_posts)
+
     return render_template(
         'posts.html',
         posts = posts,
@@ -333,11 +389,12 @@ def posts():
         m = m,
         join_res = join_res,
         likes_join = likes_join,
-        all_posts = all_posts
+        all_posts = all_posts,
+        all_comments_posts = all_comments_posts
     )
 
 
-@app.route('/get_posts')
+@app.route('/get_posts', methods=['POST'])
 def get_posts():
     cursor = mydb.cursor(prepared = True)
     sql = 'SELECT post.postID, post.title, post.content, post.image, user.uderID, user.firstName, user.last_name, user.email, user.username, profile_image FROM post INNER JOIN user ON post.user_uderID = user.uderID ORDER BY postID;'
@@ -398,10 +455,14 @@ def get_posts():
             'email': join_res[i][7],
             'username': join_res[i][8],
             'profile_image': join_res[i][9],
-            'likes': likes_join[i][0],
+
+            'likes': likes_join[i][0], #Broj lajkova po postovima...
             'currentUser': session['id'],
             'whoLiked': all_posts[i],
-            'isLiked': None
+            'isLiked': None,
+            'comments': [
+                {}, {}, {}
+            ]
         }
 
         posts.append(post)
@@ -484,6 +545,7 @@ def logout():
         session.pop('firstname')
         session.pop('lastname')
         session.pop('id')
+        session.pop('picture')
 
         return redirect(
             url_for('login')
@@ -527,10 +589,17 @@ def add_like():
     return 'OK'
 
 
-@app.route('/add_comment/<username>', methods=['POST'])
-def add_comment(username):
+@app.route('/add_comment', methods=['POST'])
+def add_comment():
+    content = request.form['content']
+    postID = request.form['postID']
+
     cursor = mydb.cursor(prepared = True)
-    
+    sql = 'INSERT INTO comment VALUES(null, ?, ?, ?)'
+    values = (content, postID, session['id'])
+    cursor.execute(sql, values)
+    mydb.commit()
+
 
 
 def dekodiraj(data):

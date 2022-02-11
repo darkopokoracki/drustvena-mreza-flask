@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     // Moramo dohvatiti sve podatke za postove
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: '/get_posts'
     })
     .done(function(data){
@@ -22,12 +22,15 @@ $(document).ready(function() {
         }
 
         let likes = $('.like-number');
-        let addLikeButtos = $('.like-btn');
-
+        let addLikeButtos = $('.like-btn');            
+        let commentSections = $('.comment-section');
+        let commentButtons = $('.comment-btn');
+        let addCommentButtons = $('.add-comment-btn');
+        console.log(addCommentButtons);
 
         for (let i = 0; i < addLikeButtos.length; i++) {
             if (addLikeButtos[i])
-    
+
             addLikeButtos[i].addEventListener('click', (e) => {
                 e.preventDefault();
     
@@ -65,6 +68,33 @@ $(document).ready(function() {
                 })
                 .done(function(data) {
                     
+                });
+            });
+
+    
+
+            // Za komentre
+            commentButtons[i].addEventListener('click', (e) => {
+                commentSections[i].classList.toggle('d_none');
+            });
+            
+            addCommentButtons[i].addEventListener('click', (e) => {
+                let content = e.target.parentElement.children[2].value;
+                let postID = data[i].postID;
+                e.target.parentElement.children[2].value = '';
+
+                $.ajax({
+                    data: {
+                        content: content,
+                        postID: postID
+                    },
+
+                    type: 'POST',
+                    url: '/add_comment'
+                })
+                .done(function(data){
+                    console.log('Podaci su uspesno posalti');
+                    console.log(data)
                 });
             });
         }

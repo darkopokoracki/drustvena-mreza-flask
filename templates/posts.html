@@ -35,19 +35,19 @@
         <div class="posts">
             {% for i in range(m) %}
             <div class="post">
-                    <div class="user-profile">
-                        <a href="/profile/{{ join_res[i][4] }}">
-                            <img src="/static/images/profile/{{ join_res[i][3] }}" alt="">
-                        </a>
-                        <a href="/profile/{{ join_res[i][4] }}">
-                            <p>
-                                {{ join_res[i][1] }} {{ join_res[i][2] }}
-                            </p>
-                        </a>
-                        {% if session['username'] == join_res[i][4] %}
-                        <i class="fas fa-circle active"></i>
-                        {% endif %}
-                    </div>
+                <div class="user-profile">
+                    <a href="/profile/{{ join_res[i][4] }}">
+                        <img src="/static/images/profile/{{ join_res[i][3] }}" alt="">
+                    </a>
+                    <a href="/profile/{{ join_res[i][4] }}">
+                        <p>
+                            {{ join_res[i][1] }} {{ join_res[i][2] }}
+                        </p>
+                    </a>
+                    {% if session['username'] == join_res[i][4] %}
+                    <i class="fas fa-circle active"></i>
+                    {% endif %}
+                </div>
 
                 <h2 class="post-title">{{ join_res[i][0] }}</h2>
                 <p class="post-content">{{ posts[i].get_content() }}</p>
@@ -87,12 +87,39 @@
                             <span style="display: none;" class="postID" id="{{ posts[i].get_id() }}"></span>
                         </form>
 
-                        <form action="/add_comment" method="POST">
-                            <button class="comment-btn">
-                                <i class="fas fa-comment"></i>
-                                comment
-                            </button>
-                        </form>
+                        <button class="comment-btn">
+                            <i class="fas fa-comment"></i>
+                            comment
+                        </button>
+                    </div>
+                </div>
+
+                <div class="comment-section d_none">
+                    <div class="write-comment-container">
+                        <a href="/profile/{{ session['username'] }}">
+                            <img src="/static/images/profile/{{ session['picture'] }}" alt="">
+                        </a>
+                        <i class="fas fa-circle active"></i>
+                        <input type="text" name="comment" id="comment-input" placeholder="Write a comment...">
+                        <button class="add-comment-btn">Send</button>
+                    </div>
+                    <hr>
+                    <div class="read-comment-container">
+
+                        {% for comment in all_comments_posts[i] %}
+                        <div class="one-comment">
+                            <a href="/profile/{{ comment[3] }}">
+                                <img src="/static/images/profile/{{ comment[4] }}" alt="comment">
+                            </a>
+                            <div class="content-container">
+                                <h3>{{ comment[1] }} {{ comment[2] }}</h3>
+                                <p class="comment-content">
+                                    {{ comment[0] }}
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>

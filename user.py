@@ -95,6 +95,7 @@ class User:
         session['firstname'] = self.__firstname
         session['lastname'] = self.__lastname
         session['id'] = self.__id
+        session['picture'] = self.__profile_image
 
     def update(self):
         cursor = mydb.cursor(prepared = True)
@@ -104,3 +105,4 @@ class User:
 
         mydb.commit()
         session['username'] = self.__username
+        session['picture'] = self.__profile_image
