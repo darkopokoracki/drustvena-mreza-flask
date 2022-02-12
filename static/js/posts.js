@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    
 
     // Moramo dohvatiti sve podatke za postove
     $.ajax({
@@ -6,12 +7,14 @@ $(document).ready(function() {
         url: '/get_posts'
     })
     .done(function(data){
+        let loggedUser = $('#logged-user').attr('class');
+        console.log(loggedUser);
         // uzimamo sve sto nam je potrebno
         // Uglavnom trebaju nam podaci samo za lajkovanje a to su:
         // 1.Kakvo ce biti dugme..
         // Increment lajka i decrement
         console.log('Stigli podaci');
-
+        console.log(data);
         // Postavljanje isLiked kolone:
         for (let i = 0; i < data.length; i++) {
             if (data[i].whoLiked.includes(data[i].currentUser)) {
@@ -26,7 +29,6 @@ $(document).ready(function() {
         let commentSections = $('.comment-section');
         let commentButtons = $('.comment-btn');
         let addCommentButtons = $('.add-comment-btn');
-        console.log(addCommentButtons);
 
         for (let i = 0; i < addLikeButtos.length; i++) {
             if (addLikeButtos[i])
@@ -71,7 +73,6 @@ $(document).ready(function() {
                 });
             });
 
-    
 
             // Za komentre
             commentButtons[i].addEventListener('click', (e) => {
@@ -82,6 +83,13 @@ $(document).ready(function() {
                 let content = e.target.parentElement.children[2].value;
                 let postID = data[i].postID;
                 e.target.parentElement.children[2].value = '';
+                
+                let new_comment = {
+                    content: content,
+                    postID: data[i].postID
+                }
+
+
 
                 $.ajax({
                     data: {

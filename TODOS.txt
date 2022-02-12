@@ -1,4 +1,6 @@
-- Sta mi treba za komentar:
-	1. user.profile_image
-	2. user.firstname
-	3. user.lastname
+1. u post rutu moracu da vidim sta koristim a sta ne...
+
+
+--- gde sam stao
+- Mozda da prosledim trenutnog korisnika kao celu listu sa svim podacima... da bih 
+mogao da izvucem potrebene podatke za komentar...

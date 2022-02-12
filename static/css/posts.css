@@ -293,6 +293,7 @@
 .one-comment {
     display: flex;
     margin-bottom: 1rem;
+    position: relative;
 }
 
 .one-comment a {
@@ -318,6 +319,14 @@
 .content-container h3 {
     font-size: 1rem;
     margin-bottom: .75rem;
+}
+
+.one-comment .active {
+    position: absolute;
+    left: 30px;
+    bottom: 28px;
+    font-size: .85rem;
+    color: green;
 }
 
 .d_none {
