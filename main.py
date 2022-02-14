@@ -519,7 +519,7 @@ def get_posts():
             'profile_image': join_res[i][9],
 
             'likes': likes_join[i][0], #Broj lajkova po postovima...
-            'currentUser': session['id'],
+            'currentUser': [session['id'], session['firstname'], session['lastname'], session['picture'], session['username']],
             'whoLiked': all_posts[i],
             'isLiked': None,
             'comments': one_post_comments

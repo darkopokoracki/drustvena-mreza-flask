@@ -1,3 +1,4 @@
+// Kada se ucita stranica, mozemo poceti sa radom...
 $(document).ready(function() {
     
 
@@ -11,13 +12,14 @@ $(document).ready(function() {
         console.log(loggedUser);
         // uzimamo sve sto nam je potrebno
         // Uglavnom trebaju nam podaci samo za lajkovanje a to su:
-        // 1.Kakvo ce biti dugme..
-        // Increment lajka i decrement
+        // 1. Kakvo ce biti dugme..
+        // 2. Increment lajka i decrement
         console.log('Stigli podaci');
         console.log(data);
         // Postavljanje isLiked kolone:
+        // Uglavnom cuvamo podatak u objektu kkoji nam pokazuje da li je trnutni korisnik lajkovao post
         for (let i = 0; i < data.length; i++) {
-            if (data[i].whoLiked.includes(data[i].currentUser)) {
+            if (data[i].whoLiked.includes(data[i].currentUser[0])) {
                 data[i].isLiked = true;
             } else {
                 data[i].isLiked = false;
@@ -29,6 +31,7 @@ $(document).ready(function() {
         let commentSections = $('.comment-section');
         let commentButtons = $('.comment-btn');
         let addCommentButtons = $('.add-comment-btn');
+        let readCommentContainers = $('.read-comment-container');
 
         for (let i = 0; i < addLikeButtos.length; i++) {
             if (addLikeButtos[i])
@@ -82,13 +85,57 @@ $(document).ready(function() {
             addCommentButtons[i].addEventListener('click', (e) => {
                 let content = e.target.parentElement.children[2].value;
                 let postID = data[i].postID;
+                let firstname = data[i].currentUser[1];
+                let lastname = data[i].currentUser[2];
+                let picture = data[i].currentUser[3];
+
+                // Rucno pravljenje jednog komentara preko Javascripta
+                // Cisti Javascript 
+                let oneComment = document.createElement('div');
+                oneComment.classList.add('one-comment');
+
+                let a = document.createElement('a');
+                a.setAttribute('href', `/profile/${data[i].currentUser[4]}`);
+                
+                let img = document.createElement('img');
+                img.setAttribute('src', `/static/images/profile/${picture}`);
+
+                a.appendChild(img);
+                oneComment.appendChild(a);
+
+                let icon = document.createElement('i');
+                icon.classList.add('fas');
+                icon.classList.add('fa-circle');
+                icon.classList.add('active');
+
+                oneComment.appendChild(icon);
+
+                let contentContainer = document.createElement('div');
+                contentContainer.classList.add('content-container');
+
+                let heading = document.createElement('h3');
+                heading.innerText = `${firstname} ${lastname}`;
+                
+                let commentContent = document.createElement('p');
+                commentContent.classList.add('comment-content');
+                commentContent.innerText = content;  //Promenljiva iz inputa...
+
+                contentContainer.appendChild(heading);
+                contentContainer.appendChild(commentContent);
+                
+                oneComment.appendChild(contentContainer);
+        
+
+                // Dodajemo napravljeni komentar u komentarsku sekciju posta...
+                readCommentContainers[i].appendChild(oneComment);
+
+
                 e.target.parentElement.children[2].value = '';
                 
                 let new_comment = {
                     content: content,
                     postID: data[i].postID
                 }
-
 
 
                 $.ajax({
