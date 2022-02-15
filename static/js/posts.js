@@ -127,30 +127,30 @@ $(document).ready(function() {
         
 
                 // Dodajemo napravljeni komentar u komentarsku sekciju posta...
-                readCommentContainers[i].appendChild(oneComment);
+                // Ali pre toga moramo proveriti..
+                if (content == "" || content == null) {
+                    e.target.parentElement.children[2].style.outline = '2px solid red';
+                    const outlineTimeout = setTimeout(() => {
+                        e.target.parentElement.children[2].style.removeProperty('outline');
+                    }, 2000);
+                } else {
+                    readCommentContainers[i].appendChild(oneComment);
+                    e.target.parentElement.children[2].value = '';
 
-
-                e.target.parentElement.children[2].value = '';
-                
-                let new_comment = {
-                    content: content,
-                    postID: data[i].postID
+                    $.ajax({
+                        data: {
+                            content: content,
+                            postID: postID
+                        },
+    
+                        type: 'POST',
+                        url: '/add_comment'
+                    })
+                    .done(function(data){
+                        console.log('Podaci su uspesno posalti');
+                        console.log(data)
+                    });
                 }
-
-
-                $.ajax({
-                    data: {
-                        content: content,
-                        postID: postID
-                    },
-
-                    type: 'POST',
-                    url: '/add_comment'
-                })
-                .done(function(data){
-                    console.log('Podaci su uspesno posalti');
-                    console.log(data)
-                });
             });
         }
     });
