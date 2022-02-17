@@ -17,7 +17,7 @@ profile_app = Blueprint('profile', __name__, static_folder="static", template_fo
 def profile(username):
     if len(session) == 0:
         return redirect(
-            url_for('login')
+            url_for('login.login')
         )
 
     cursor = mydb.cursor(prepared = True)
@@ -29,7 +29,7 @@ def profile(username):
 
     if res == None:
         return redirect(
-            url_for('home')
+            url_for('home.hom')
         )
 
     res = dekodiraj(res)

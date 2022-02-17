@@ -1,8 +1,51 @@
 {% extends 'base.html' %}
 
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/post.css') }}">
+{% endblock %}
+
 {% block title %} Post {% endblock %}
 
 
 {% block content %}
-    <h1>Post</h1>
+<section id="post-section">
+    <div v-if="isVisible" class="user-profile">
+        <img src="/static/images/profile/{{ post_user_res[8] }}" alt="">
+        <p>
+            {{ post_user_res[4] }} {{ post_user_res[5] }}
+        </p>
+    </div>
+
+    <div class="post-container">
+        <div class="left-side">
+            <h1 class="post-title">{{ post_user_res[1] }}</h1>
+            <p class="post-content">
+                {{ post_user_res[2] }}
+            </p>
+            <div class="image-container">
+                <img src="/static/images/posts/{{ post_user_res[3] }}" alt="image">
+            </div>
+        </div>
+
+        <div class="right-side">
+            <div class="switch-button-container">
+                <div class="switch-button">
+                    <input class="switch-button-checkbox" type="checkbox"></input>
+                    <label class="switch-button-label" for=""><span class="switch-button-label-span">Likes</span></label>
+                </div>  
+            </div>
+
+            <div class="like-modal">
+                Like modal
+            </div>
+
+            <div class="comment-modal d_none">
+                Comment modal
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <script src="{{ url_for('static', filename='js/post.js') }}"></script>
 {% endblock %}

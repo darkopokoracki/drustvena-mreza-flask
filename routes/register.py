@@ -16,7 +16,7 @@ register_app = Blueprint('register', __name__, static_folder="static", template_
 def register():
     if len(session) > 0:
         return redirect(
-            url_for('posts')
+            url_for('posts.posts')
         )
 
     if request.method == 'GET':
@@ -79,5 +79,5 @@ def register():
     mydb.commit()
 
     return redirect(
-        url_for('posts')
+        url_for('posts.posts')
     )

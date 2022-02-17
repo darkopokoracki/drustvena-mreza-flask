@@ -17,7 +17,7 @@ posts_app = Blueprint('posts', __name__, static_folder="static", template_folder
 def posts():
     if len(session) == 0:
         return redirect(
-            url_for('login')
+            url_for('login.login')
         )
 
     # Uzimamo sve postove iz baze

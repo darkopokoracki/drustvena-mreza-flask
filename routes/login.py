@@ -16,7 +16,7 @@ login_app = Blueprint("login", __name__, static_folder="static", template_folder
 def login():
     if len(session) > 0:
         return redirect(
-            url_for('posts')
+            url_for('posts.posts')
         )
 
     if request.method == 'GET':
@@ -54,7 +54,7 @@ def login():
     user.login() #Loginujemo korisnika pomocu metode u klasi User
 
     return redirect(
-        url_for('posts')
+        url_for('posts.posts')
     )
 
 def dekodiraj(data):

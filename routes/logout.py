@@ -27,5 +27,5 @@ def logout():
 
     else:
         return redirect(
-            url_for('register')
+            url_for('register.register')
         )

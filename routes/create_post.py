@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, session
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, session, current_app
 import mysql.connector
 import os.path
 from werkzeug.utils import secure_filename
@@ -18,15 +18,15 @@ create_post_app = Blueprint('create_post', __name__, static_folder="static", tem
 def create_post():
     if len(session) == 0:
         return redirect(
-            url_for('login')
+            url_for('login.login')
         )
 
     if len(session) == 0:
         return redirect(
-            url_for('login')
+            url_for('login.login')
         )
 
-    create_post_app.config['UPLOAD_FOLDER'] = 'static/images/posts'
+    current_app.config['UPLOAD_FOLDER'] = 'static/images/posts'
 
     if request.method == 'GET':
         return render_template(
@@ -75,5 +75,5 @@ def create_post():
     mydb.commit()  #Moramo i ovde sacuvati da bi se relodovalo...
 
     return redirect(
-        url_for('posts')
+        url_for('posts.posts')
     )

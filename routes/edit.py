@@ -1,10 +1,9 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, session
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, session, current_app
 from passlib.hash import sha256_crypt
 from classes.user import User
 import mysql.connector
 import os.path
 from werkzeug.utils import secure_filename
-
 
 mydb = mysql.connector.connect (
     host = 'localhost',
@@ -17,7 +16,7 @@ edit_app = Blueprint('edit', __name__, static_folder="static", template_folder="
 
 @edit_app.route('/edit/<username>', methods=['GET', 'POST'])
 def edit(username):
-    edit_app.config['UPLOAD_FOLDER'] = 'static/images/profile' #Podesavamo folder gde cemo cuvati slike
+    current_app.config['UPLOAD_FOLDER'] = 'static/images/profile' #Podesavamo folder gde cemo cuvati slike
 
     if request.method == 'GET':
         cursor = mydb.cursor(prepared = True)
@@ -29,7 +28,7 @@ def edit(username):
 
         if res == None:
             return redirect(
-                url_for('posts')
+                url_for('posts.posts')
             )
     
         res = dekodiraj(res)
@@ -124,7 +123,7 @@ def edit(username):
         mydb.commit()
 
         return redirect(
-            url_for('profile', username = new_username)
+            url_for('profile.profile', username = new_username)
         )
 
 def dekodiraj(data):

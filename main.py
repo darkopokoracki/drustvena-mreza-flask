@@ -9,8 +9,11 @@ from routes.add_comment import add_comment_app
 from routes.add_like import add_like_app
 from routes.logout import logout_app
 from routes.posts import posts_app
+from routes.get_posts import get_posts_app
 from routes.home import home_app
 from routes.profile import profile_app
+from routes.notifications import notifications_app
+from routes.post import post_app
 
 
 #Register all BluePrints
@@ -23,8 +26,11 @@ app.register_blueprint(add_comment_app)
 app.register_blueprint(add_like_app)
 app.register_blueprint(logout_app)
 app.register_blueprint(posts_app)
+app.register_blueprint(get_posts_app)
 app.register_blueprint(home_app)
 app.register_blueprint(profile_app)
+app.register_blueprint(notifications_app)
+app.register_blueprint(post_app)
 
 app.config['SECRET_KEY'] = '27723dshhDJs!'
 
