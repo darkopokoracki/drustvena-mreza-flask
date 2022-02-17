@@ -1,15 +1,10 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for, session, jsonify
 from passlib.hash import sha256_crypt
 from classes.user import User
-import mysql.connector
 from classes.post import Post
 
-mydb = mysql.connector.connect (
-    host = 'localhost',
-    user = 'root',
-    password = '',
-    database = 'drustvena'
-)
+from database import mydb
+
 
 get_posts_app = Blueprint('get_posts', __name__, static_folder="static", template_folder="templates")
 

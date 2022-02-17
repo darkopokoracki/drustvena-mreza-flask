@@ -1,15 +1,10 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for, session, current_app
-import mysql.connector
 import os.path
 from werkzeug.utils import secure_filename
 from classes.post import Post
 
-mydb = mysql.connector.connect (
-    host = 'localhost',
-    user = 'root',
-    password = '',
-    database = 'drustvena'
-)
+from database import mydb
+
 
 create_post_app = Blueprint('create_post', __name__, static_folder="static", template_folder="templates")
 
@@ -63,7 +58,7 @@ def create_post():
 
     if image and extension in allowed_extensions:
         filename = secure_filename(image.filename)
-        image.save(os.path.join(create_post_app.config['UPLOAD_FOLDER'], filename))
+        image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
     else:
         return render_template(
             'create_post.html',

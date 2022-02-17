@@ -1,16 +1,11 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for, session, current_app
 from passlib.hash import sha256_crypt
 from classes.user import User
-import mysql.connector
 import os.path
 from werkzeug.utils import secure_filename
 
-mydb = mysql.connector.connect (
-    host = 'localhost',
-    user = 'root',
-    password = '',
-    database = 'drustvena'
-)
+from database import mydb
+
 
 edit_app = Blueprint('edit', __name__, static_folder="static", template_folder="templates")
 

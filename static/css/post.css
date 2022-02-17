@@ -106,6 +106,14 @@
     color: black;
 }
 
+.like-modal {
+    padding: 2rem 1rem;
+}
+
+.comment-modal {
+    padding: 2rem 1rem;
+}
+
 .d_none {
     display: none;
 }

@@ -8,6 +8,8 @@
 
 
 {% block content %}
+<span style="display: none;" class="postID" id="{{ post_user_res[0] }}"></span>
+
 <section id="post-section">
     <div v-if="isVisible" class="user-profile">
         <img src="/static/images/profile/{{ post_user_res[8] }}" alt="">
@@ -36,11 +38,11 @@
             </div>
 
             <div class="like-modal">
-                Like modal
+
             </div>
 
             <div class="comment-modal d_none">
-                Comment modal
+
             </div>
         </div>
     </div>

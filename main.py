@@ -1,5 +1,7 @@
 from flask import Flask
 
+
+
 #import BluePrints
 from routes.login import login_app
 from routes.register import register_app
@@ -14,6 +16,7 @@ from routes.home import home_app
 from routes.profile import profile_app
 from routes.notifications import notifications_app
 from routes.post import post_app
+from routes.get_post import get_post_app
 
 
 #Register all BluePrints
@@ -31,6 +34,7 @@ app.register_blueprint(home_app)
 app.register_blueprint(profile_app)
 app.register_blueprint(notifications_app)
 app.register_blueprint(post_app)
+app.register_blueprint(get_post_app)
 
 app.config['SECRET_KEY'] = '27723dshhDJs!'
 

@@ -1,12 +1,4 @@
-import mysql.connector
-
-
-mydb = mysql.connector.connect (
-    host = 'localhost',
-    user = 'root',
-    password = '',
-    database = 'drustvena'
-)
+from database import mydb
 
 class Likes:
     __id: int
@@ -52,4 +44,5 @@ class Likes:
         values = (self.__whomID, self.__postID, self.__whoID)
         cursor.execute(sql, values)
 
+        mydb.commit()
         mydb.commit()

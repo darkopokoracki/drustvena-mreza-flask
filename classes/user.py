@@ -1,13 +1,6 @@
-import mysql.connector 
 from passlib.hash import sha256_crypt
 from flask import session
-
-mydb = mysql.connector.connect (
-    host = 'localhost',
-    user = 'root',
-    password = '',
-    database = 'drustvena'
-)
+from database import mydb
 
 class User:
     __id: int
