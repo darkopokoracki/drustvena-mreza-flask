@@ -34,6 +34,7 @@
 .switch-button-container {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .switch-button {
@@ -108,10 +109,13 @@
 
 .like-modal {
     padding: 2rem 1rem;
+    overflow-y: scroll;
+    height: 400px;
 }
 
 .comment-modal {
     padding: 2rem 1rem;
+    background-color: rgb(200, 200, 200);
 }
 
 .d_none {
@@ -137,4 +141,116 @@
     left: 30px;
     bottom: -3px;
     font-size: .85rem;
+}
+
+.like-modal .user-profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+}
+
+.write-comment-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.write-comment-container a {
+    margin-right: .5rem;
+}
+
+.write-comment-container img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgb(240, 240, 240);
+}
+
+.write-comment-container .active {
+    position: absolute;
+    left: 30px;
+    bottom: 3px;
+    font-size: .85rem;
+    color: green;
+}
+
+.read-comment-container {
+    margin-top: 2rem;
+    overflow-y: scroll;
+    height: 300px;
+}
+
+.one-comment {
+    display: flex;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.one-comment a {
+    margin-right: 1rem;
+}
+
+.one-comment img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgb(240, 240, 240);
+}
+
+.one-comment .content-container {
+    width: 80%;
+    background: rgb(240, 240, 240);
+    padding: .5rem 1rem;
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+    border-radius: 10px;
+}
+
+.one-comment .active {
+    position: absolute;
+    left: 30px;
+    bottom: 28px;
+    font-size: .85rem;
+    color: green;
+}
+
+#comment-input {
+    width: 68%;
+    border: none;
+    border-radius: 10px;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    margin-right: 1rem;
+}
+
+#comment-input {
+    width: 68%;
+    border: none;
+    border-radius: 10px;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    margin-right: 1rem;
+}
+
+.add-comment-btn {
+    width: 20%;
+    border: none;
+    font-weight: bold;
+    background: black;
+    color: white;
+    font-size: 1rem;
+    border-bottom-left-radius: 20px;
+}
+
+.add-comment-btn:hover {
+    color: black;
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+    transition: 300ms;
+}
+
+#comment-input:focus {
+    outline: none;
 }

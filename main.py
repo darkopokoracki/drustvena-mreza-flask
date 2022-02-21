@@ -1,7 +1,6 @@
 from flask import Flask
 
 
-
 #import BluePrints
 from routes.login import login_app
 from routes.register import register_app

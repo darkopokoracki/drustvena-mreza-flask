@@ -34,7 +34,7 @@
                 <div class="switch-button">
                     <input class="switch-button-checkbox" type="checkbox"></input>
                     <label class="switch-button-label" for=""><span class="switch-button-label-span">Likes</span></label>
-                </div>  
+                </div>
             </div>
 
             <div class="like-modal">
@@ -42,7 +42,18 @@
             </div>
 
             <div class="comment-modal d_none">
-
+                <div class="write-comment-container">
+                    <a href="/profile/{{ session['username'] }}">
+                        <img src="/static/images/profile/{{ session['picture'] }}" alt="">
+                    </a>
+                    <i class="fas fa-circle active"></i>
+                    <input type="text" name="comment" id="comment-input" placeholder="Write a comment...">
+                    <button class="add-comment-btn">Send</button>
+                </div>
+                <hr>
+                <div class="read-comment-container">
+                    
+                </div>
             </div>
         </div>
     </div>
