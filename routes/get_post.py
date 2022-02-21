@@ -77,3 +77,15 @@ def dekodiraj(data):
             data[i] = data[i].decode()
 
     return data
+
+@get_post_app.route('/currentUser', methods=['POST'])
+def currentUser():
+    return jsonify(
+        {   
+            'id': session['id'],
+            'username': session['username'],
+            'firstname': session['firstname'],
+            'lastname': session['lastname'],
+            'picture': session['picture']
+        }
+    )

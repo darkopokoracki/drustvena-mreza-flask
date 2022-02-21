@@ -68,6 +68,18 @@ h1 {
     margin-bottom: 1.5rem;
 }
 
+
+.post-link {
+    text-decoration: none;
+    color: black;
+}
+
+.post-link:hover {
+    text-decoration: underline;
+    color: #1F1F1F;
+    transition: 300ms;
+}
+
 .read-more-btn {
     border: none;
     border-radius: 3px;

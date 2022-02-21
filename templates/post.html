@@ -9,6 +9,7 @@
 
 {% block content %}
 <span style="display: none;" class="postID" id="{{ post_user_res[0] }}"></span>
+<span style="display: none;" class="userID" id="{{ post_user_res[9] }}"></span>
 
 <section id="post-section">
     <div v-if="isVisible" class="user-profile">
@@ -38,7 +39,10 @@
             </div>
 
             <div class="like-modal">
-
+                <div class="like-icon">
+                    <i class="{% if session['id'] in who_liked %} fas {% else %} far {% endif %} fa-thumbs-up"></i>
+                    <p class="like-number"></p>
+                </div>
             </div>
 
             <div class="comment-modal d_none">

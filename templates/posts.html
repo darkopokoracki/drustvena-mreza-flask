@@ -49,7 +49,9 @@
                     {% endif %}
                 </div>
 
-                <h2 class="post-title">{{ join_res[i][0] }}</h2>
+                <a href="/post/{{ posts[i].get_id() }}" class="post-title-link">
+                    <h2 class="post-title">{{ join_res[i][0] }}</h2>
+                </a>
                 <p class="post-content">{{ posts[i].get_content() }}</p>
                 <div class="img-container">
                     <img src="/static/images/posts/{{ posts[i].get_image() }}" 

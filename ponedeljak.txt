@@ -1,0 +1,12 @@
+1. Kada kliknem na post da me odvede na post. (RESENO)
+	- Na ruti /posts (OK)
+	- Kao i na ruti /profil (OK)
+
+2. Radimo na ruti /post/<id>
+	- Dodali dugme za lajkovanje i sprovesti celu logiku:
+		- Odmah ga prikazati na frontendu.
+		- Dodati lajk u bazu podatka.
+
+	- Kada komentarisem:
+		- Prikazati komentar na frintu.
+		- Dodati komentar u bazu podataka.

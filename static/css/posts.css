@@ -48,6 +48,16 @@
     margin: 1rem;
 }
 
+.post-title-link {
+    text-decoration: none;
+    color: black;
+}
+
+.post-title-link:hover {
+    text-decoration: underline;
+    transition: 300ms;
+}
+
 .contacts {
     background-color: rgb(240, 240, 240);
     padding: .5rem 0 .5rem .5rem;

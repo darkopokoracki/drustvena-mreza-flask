@@ -147,8 +147,7 @@ $(document).ready(function() {
                         url: '/add_comment'
                     })
                     .done(function(data){
-                        console.log('Podaci su uspesno posalti');
-                        console.log(data)
+
                     });
                 }
             });
