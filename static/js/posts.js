@@ -137,6 +137,21 @@ $(document).ready(function() {
                     readCommentContainers[i].appendChild(oneComment);
                     e.target.parentElement.children[2].value = '';
 
+                    // Na frontu moramo povecati komentar za jedan
+                    let buttonPostID = e.target.id.split("-");
+                    buttonPostID = buttonPostID[buttonPostID.length - 1];
+
+                    let commentsNumbers = document.querySelectorAll('.comments-number');
+                    for (let i = 0; i < commentsNumbers.length; i++) {
+                        let commentPostID = commentsNumbers[i].id.split("-");
+                        commentPostID = commentPostID[commentPostID.length - 1];
+
+                        if (buttonPostID === commentPostID) {
+                            let currentCommentNumber = parseInt(commentsNumbers[i].innerText);
+                            commentsNumbers[i].innerText = currentCommentNumber += 1;
+                        }
+                    }
+
                     $.ajax({
                         data: {
                             content: content,

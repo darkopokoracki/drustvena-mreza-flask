@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="comments">
-                            <p class="comments-number">{{ all_comments_posts[i][-1] }}</p>
+                            <p id="comments-number-{{ posts[i].get_id() }}" class="comments-number">{{ all_comments_posts[i][-1] }}</p>
                             <p>Comments</p> 
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                         </a>
                         <i class="fas fa-circle active"></i>
                         <input type="text" name="comment" id="comment-input" placeholder="Write a comment...">
-                        <button class="add-comment-btn">Send</button>
+                        <button id="comment-btn-{{ posts[i].get_id() }}" class="add-comment-btn">Send</button>
                     </div>
                     <hr>
                     <div class="read-comment-container">

@@ -207,6 +207,7 @@ function commentPost() {
         let postID = document.querySelector('.postID');
         let id = parseInt(postID.id);
 
+
         sendButton.addEventListener('click', () => {
             // Prvo frontend - pravimo primerak komentara:
             let oneComment = document.createElement('div');
@@ -233,23 +234,34 @@ function commentPost() {
 
             oneComment.appendChild(a);
             oneComment.appendChild(contentContainer);
-            console.log(oneComment)
 
-            document.querySelector('.read-comment-container').appendChild(oneComment);
+
+            if (commentInput.value == "" || commentInput.value == null) {
+                // Ako je komentar prazan, onda ne sme se poslati u bazu podataka:
+                commentInput.style.outline = '2px solid red';
+                const outlineTimeout = setTimeout(() => {
+                    commentInput.style.removeProperty('outline');
+                }, 2000);
+
+            } else {
+                document.querySelector('.read-comment-container').appendChild(oneComment);
             
-            // Sada mozemo da poslajemo i na backend.
-            $.ajax({
-                data: {
-                    content: commentInput.value,
-                    postID: id
-                },
+                // Sada mozemo da poslajemo i na backend.
+                $.ajax({
+                    data: {
+                        content: commentInput.value,
+                        postID: id
+                    },
+    
+                    type: 'POST',
+                    url: '/add_comment'
+                })
+                .done(function(data) {
+                    
+                });
+                commentInput.value = "";
+            }
 
-                type: 'POST',
-                url: '/add_comment'
-            })
-            .done(function(data) {
-
-            });
 
         });
     });

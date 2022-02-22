@@ -42,7 +42,9 @@
             </a>
             
             <i class="fas fa-bell"></i>
-            <i class="fas fa-cog"></i>
+            <a href="/edit/{{ session['username'] }}">
+                <i class="fas fa-cog"></i>
+            </a>
             <a href="/logout" class="sign-link">Logout</a>
             {% else %}
             <a href="/register" class="sign-link">Register</a>
